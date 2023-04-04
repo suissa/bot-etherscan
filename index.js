@@ -18,13 +18,14 @@ const abi = [
   "function balanceOf(address owner) view returns (uint256)",
   "function decimals() view returns (uint8)",
   "function symbol() view returns (string)",
-
   // Authenticated Functions
   "function transfer(address to, uint amount) returns (bool)",
-
   // Events
   "event Transfer(address indexed from, address indexed to, uint amount)"
 ];
+
+const account1 = "0x4e238622c1797115F35174C50583F5D41b915cb6";
+const account2 = "0xa620A5199F498B81191D291c62a70aa761be7536"
 
 // address do contrato Doric
 const address = "0x94b6dAE0E72da0F2f076e44b8B819723Fe1d8a40";
@@ -33,10 +34,6 @@ const contractAddress = '0x420412e765bfa6d85aaac94b4f7b708c89be2e2b';
 let LAST_TRANSACTION = null;
 // interval de 1 minuto
 setInterval(async () => {
-  // busca o saldo do account1
-  // axios.get(`https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=${contractAddress}&address=0x4e238622c1797115F35174C50583F5D41b915cb6&tag=latest&apikey=${apiKey}`)
-  //   .then(response => {
-
   axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${contractAddress}&sort=desc&apikey=${apiKey}`)
     .then(async (response) => {
       const lastTx = response.data.result[0];
@@ -49,8 +46,8 @@ setInterval(async () => {
           console.log(await erc20.symbol());
           const result = await erc20.transfer("0x4e238622c1797115F35174C50583F5D41b915cb6", value);
           console.log(result);
-          console.log("account1", await erc20.balanceOf("0x4e238622c1797115F35174C50583F5D41b915cb6"))
-          console.log("account2", await erc20.balanceOf("0xa620A5199F498B81191D291c62a70aa761be7536"))
+          console.log("account1", await erc20.balanceOf(account1))
+          console.log("account2", await erc20.balanceOf(account2))
         } catch (error) {
           console.error(error);
         }
