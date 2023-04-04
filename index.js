@@ -26,8 +26,9 @@ const abi = [
   "event Transfer(address indexed from, address indexed to, uint amount)"
 ];
 
-// address do contrato
-const address = "0xAa3Ab8852A8c831bc001Ee99f516870464BfFF59";
+// address do contrato Doric
+const address = "0x94b6dAE0E72da0F2f076e44b8B819723Fe1d8a40";
+// address do contrato BRZ
 const contractAddress = '0x420412e765bfa6d85aaac94b4f7b708c89be2e2b';
 let LAST_TRANSACTION = null;
 // interval de 1 minuto
@@ -40,24 +41,28 @@ setInterval(async () => {
     .then(async (response) => {
       const lastTx = response.data.result[0];
       console.log(`A última transação foi: ${JSON.stringify(lastTx, null, 2)}`);
-
+      const value = lastTx.value;
+      // LAST_TRANSACTION != null && 
       if (LAST_TRANSACTION != null && LAST_TRANSACTION.timeStamp != lastTx.timeStamp) {
         try {
           const erc20 = new ethers.Contract(address, abi, signer);
           console.log(await erc20.symbol());
-          const result = await erc20.transfer("0x4e238622c1797115F35174C50583F5D41b915cb6", parseEther("10"));
+          const result = await erc20.transfer("0x4e238622c1797115F35174C50583F5D41b915cb6", value);
           console.log(result);
           console.log("account1", await erc20.balanceOf("0x4e238622c1797115F35174C50583F5D41b915cb6"))
           console.log("account2", await erc20.balanceOf("0xa620A5199F498B81191D291c62a70aa761be7536"))
         } catch (error) {
           console.error(error);
         }
+      } else {
+        console.log('Não houve transação') //, { LAST_TRANSACTION, lastTx });
       }
+      LAST_TRANSACTION = lastTx;
     })
     .catch(error => {
       console.log(`Erro ao buscar a última transação: ${error}`);
     });
-}, 60 * 1000);
+}, 10 * 1000);
 // ;(async () => {
 //   try {
 //     const erc20 = new ethers.Contract(address, abi, signer);

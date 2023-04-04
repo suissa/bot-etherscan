@@ -1,41 +1,74 @@
-const Web3 = require('web3');
-const web3 = new Web3('https://mainnet.infura.io/v3/4e8df18e7d844dfc931f863e29fede00');
-const contractAddress = '0x420412e765bfa6d85aaac94b4f7b708c89be2e2b';
-const contractAbi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"value","type":"uint256"}],"name":"burn","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"isPauser","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renouncePauser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"value","type":"uint256"}],"name":"burnFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"account","type":"address"}],"name":"addPauser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"account","type":"address"}],"name":"addMinter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"renounceMinter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"isMinter","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"name","type":"string"},{"name":"symbol","type":"string"},{"name":"decimals","type":"uint8"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"account","type":"address"}],"name":"MinterAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"account","type":"address"}],"name":"MinterRemoved","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"account","type":"address"}],"name":"Paused","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"account","type":"address"}],"name":"Unpaused","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"account","type":"address"}],"name":"PauserAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"account","type":"address"}],"name":"PauserRemoved","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"}]; // coloque o ABI do contrato aqui
-const tokenContract = new web3.eth.Contract(contractAbi, contractAddress);
-const options = {
-  fromBlock: 0,
-  toBlock: 'latest',
-  filter: {
-    _to: '0x420412e765bfa6d85aaac94b4f7b708c89be2e2b'
-  }
-};
-
-console.log(tokenContract.getPastEvents);
-tokenContract.getPastEvents('Transfer', options, (error, events) => {
-  console.log(events);
-});
-
-tokenContract.methods.balanceOf(contractAddress).call((error, balance) => {
-  console.log(`O saldo do endereço é: ${balance}`);
-});
-tokenContract.methods.totalSupply().call((error, totalSupply) => {
-  console.log(`O total supply do token é: ${totalSupply}`);
-});
-tokenContract.methods.name().call((error, name) => {
-  console.log(`O nome do token é: ${name}`);
-});
-
+const pkg = require('eth-lightwallet')
+const web3 = require('web3')
+const { ethers, JsonRpcProvider, parseEther } = require('ethers')
+const provider = new JsonRpcProvider(`https://testnet.doric.network/`)
 const axios = require('axios');
 
 const apiKey = '7XVPRP4R6VM22S65BCU62TB4Z8F678DZ9Z';
-// const contractAddress = '0x420412e765bfa6d85aaac94b4f7b708c89be2e2b';
+const pk = "dc0c176a2c4f3f5bb4f4eee985f4a8f0503249127fa992138059f9cbfea71681"
+const walletJson = new ethers.Wallet(pk);
+const signer = walletJson.connect(provider);
 
-axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${contractAddress}&sort=desc&apikey=${apiKey}`)
-  .then(response => {
-    const lastTx = response.data.result[0];
-    console.log(`A última transação foi: ${JSON.stringify(lastTx)}`);
-  })
-  .catch(error => {
-    console.log(`Erro ao buscar a última transação: ${error}`);
-  });
+// account2 com drc 0xa620A5199F498B81191D291c62a70aa761be7536
+// account1 sem drc 0x4e238622c1797115F35174C50583F5D41b915cb6
+// A Human-Readable ABI; for interacting with the contract, we
+// must include any fragment we wish to use
+const abi = [
+  // Read-Only Functions
+  "function balanceOf(address owner) view returns (uint256)",
+  "function decimals() view returns (uint8)",
+  "function symbol() view returns (string)",
+
+  // Authenticated Functions
+  "function transfer(address to, uint amount) returns (bool)",
+
+  // Events
+  "event Transfer(address indexed from, address indexed to, uint amount)"
+];
+
+// address do contrato Doric
+const address = "0x94b6dAE0E72da0F2f076e44b8B819723Fe1d8a40";
+// address do contrato BRZ
+const contractAddress = '0x420412e765bfa6d85aaac94b4f7b708c89be2e2b';
+let LAST_TRANSACTION = null;
+// interval de 1 minuto
+// setInterval(async () => {
+  // busca o saldo do account1
+  // axios.get(`https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=${contractAddress}&address=0x4e238622c1797115F35174C50583F5D41b915cb6&tag=latest&apikey=${apiKey}`)
+  //   .then(response => {
+
+//   axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${contractAddress}&sort=desc&apikey=${apiKey}`)
+//     .then(async (response) => {
+//       const lastTx = response.data.result[0];
+//       console.log(`A última transação foi: ${JSON.stringify(lastTx, null, 2)}`);
+//       const value = lastTx.value;
+//       // LAST_TRANSACTION != null && 
+//       // if (LAST_TRANSACTION.timeStamp != lastTx.timeStamp) {
+//         try {
+//           const erc20 = new ethers.Contract(address, abi, signer);
+//           console.log(await erc20.symbol());
+//           const result = await erc20.transfer("0x4e238622c1797115F35174C50583F5D41b915cb6", parseEther(value));
+//           console.log(result);
+//           console.log("account1", await erc20.balanceOf("0x4e238622c1797115F35174C50583F5D41b915cb6"))
+//           console.log("account2", await erc20.balanceOf("0xa620A5199F498B81191D291c62a70aa761be7536"))
+//         } catch (error) {
+//           console.error(error);
+//         }
+//       // }
+//     })
+//     .catch(error => {
+//       console.log(`Erro ao buscar a última transação: ${error}`);
+//     });
+// }, 10 * 1000);
+;(async () => {
+  try {
+    const erc20 = new ethers.Contract(address, abi, signer);
+    console.log(await erc20.symbol());
+    const result = await erc20.transfer("0x4e238622c1797115F35174C50583F5D41b915cb6", "50000");
+    console.log(result);
+    console.log("account1", await erc20.balanceOf("0x4e238622c1797115F35174C50583F5D41b915cb6"))
+    console.log("account2", await erc20.balanceOf("0xa620A5199F498B81191D291c62a70aa761be7536"))
+  } catch (error) {
+    console.error(error);
+  }
+})()
