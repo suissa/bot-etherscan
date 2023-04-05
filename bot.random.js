@@ -38,7 +38,7 @@ let tempo = 0;
 
 async function atualizaTempo() {
   // Gera um tempo aleatório entre 1 min e 1 hora
-  tempo = Math.floor(Math.random() * (600000 - 60000 + 1)) + 10000;
+  tempo = Math.floor(Math.random() * (6000000 - 800000 + 1)) + 10000;
   console.log(`\n\n\nAntes: ${new Date()}`);
   console.log(`Próximo intervalo: ${tempo}ms`);
   // Define o próximo intervalo
