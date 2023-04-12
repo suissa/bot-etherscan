@@ -69,7 +69,7 @@ async function atualizaTempo() {
     const randomValue = (Math.floor(Math.random() * 100) + 1).toString()
     console.log({randomValue});
     const quantity = parseEther(randomValue);
-    const result = await erc20.transfer(account1, quantity);
+    const result = await erc20.transfer(account2, quantity);
     console.log(result, new Date());
     console.log("account1", await erc20.balanceOf(account1))
     console.log("account2", await erc20.balanceOf(account2))
