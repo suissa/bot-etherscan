@@ -7,6 +7,19 @@ const axios = require('axios');
 const apiKey = '7XVPRP4R6VM22S65BCU62TB4Z8F678DZ9Z';
 const pk1 = "14c16c6e97885e553482d63fb3365ad96e0727b6bedd12362b8c691162532637"
 const pk2 = "dc0c176a2c4f3f5bb4f4eee985f4a8f0503249127fa992138059f9cbfea71681"
+const pk3 = "77ce064ff06cb6940f1c3c3d669dea632e60a3c5326faa40b689071b8c1aada8"
+const pk4 = "b158501c9c184ab1bae36b9ed8804a1454ccb572673a7e8aa9f60723b9a56831"
+const pk5 = "13387760062579904ee300e4dd9ea4d7d0891eca97cfa121c7cdfe8a94be88c3"
+const pk6 = "7d6cbc3557ffbe76562afabf0e4491f664b666caf317ccf2ed1efa69afa77d77"
+const pk7 = "dfe096cdfca00eabb1b237b2c4a171fa6c8fc5b93b2dd710390e8c1cce402cb9"
+const pk8 = "4de6a329367ceb439d2a75d126704b9db617cde3ffc1f367865121176ffc6130"
+const pk9 = "fdb960989f0a489a85831eda3cb1d82de1e9a32d3d7440369a2dfa33b6561d41"
+const pk10 = "b46f8d3b04ad863d8206aec58189c35f10f4e2fcf15ac32e449890fb2ab6e62e"
+const pk11 = "a62d6bdeadbded5dd158ec0bd8a6e39f32374271edc760430556f554e0f75c21"
+const pk12 = "646e66d04b2bfa2c963b49a892ebbb4a14d26228e4bb8e07d753d5e97e2e2d09"
+const pk13 = "7711c15dea3608feaa69fd272e33fa40c39d6fa3de3e19accd2a03660d56832f"
+
+
 const walletJson = new ethers.Wallet(pk1);
 const signer = walletJson.connect(provider);
 
@@ -27,6 +40,17 @@ const abi = [
 
 const account1 = "0x4e238622c1797115F35174C50583F5D41b915cb6";
 const account2 = "0xa620A5199F498B81191D291c62a70aa761be7536"
+const account3 = "0x5ae5A8e28ddf739C92d2A23Fd97A9FE2454f6d79"
+const account4 = ""
+const account5 = ""
+const account6 = ""
+const account7 = ""
+const account8 = ""
+const account9 = ""
+const account10 = ""
+const account11 = ""
+const account12 = ""
+const account13 = ""
 
 // address do contrato Doric
 // const address = "0x61b0c854C60a5577E68be7a40Bc4D61935c1a058"
