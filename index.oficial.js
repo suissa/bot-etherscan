@@ -132,7 +132,7 @@ async function atualizaTempo() {
     console.log(symbol);
 
     const balance = await erc20.balanceOf(account1);
-    console.log("Saldo da account1 em tokens: ", ethers.utils.formatUnits(balance, 'wei'));  // ou use a quantidade de casas decimais do token
+    console.log("Saldo da account1 em tokens: ", ethers.formatUnits(balance, 'wei'));  // ou use a quantidade de casas decimais do token
 
 
     const randomValue = (Math.floor(Math.random() * 100) + 1).toString()
