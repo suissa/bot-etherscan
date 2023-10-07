@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Yellow Red Slow",
+    "acronym": "YRS",
+    "total_supply": 11255369,
+    "address": "0xf174Df34b176441b0d4C49Db33A79395D0C3e132"
+  },
+  {
+    "name": "Fast Green Blue",
+    "acronym": "FGB",
+    "total_supply": 20766696,
+    "address": "0x0D31Ba4fdCBC5Da41837EA6B6B67de4224a636D2"
+  },
+  {
+    "name": "High Slow Yellow Low",
+    "acronym": "HSYL",
+    "total_supply": 19027629,
+    "address": "0x2893e0E021D580df9e45005145A81B40A23632b0"
+  },
+  {
+    "name": "Red Blue Low",
+    "acronym": "RBL",
+    "total_supply": 32179245,
+    "address": "0x817b088889Fef30b218f331245dBEC41e59BE9C7"
+  },
+  {
+    "name": "Slow Yellow Fast",
+    "acronym": "SYF",
+    "total_supply": 38829202,
+    "address": "0x66Aa4340761eB298d19eBd2A532bF9C9633F33e4"
+  }
+]

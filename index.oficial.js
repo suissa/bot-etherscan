@@ -1,3 +1,4 @@
+const fs = require('fs');
 const pkg = require('eth-lightwallet')
 const web3 = require('web3')
 const { ethers, JsonRpcProvider, parseEther } = require('ethers')
@@ -19,6 +20,8 @@ const pk11 = "a62d6bdeadbded5dd158ec0bd8a6e39f32374271edc760430556f554e0f75c21"
 const pk12 = "646e66d04b2bfa2c963b49a892ebbb4a14d26228e4bb8e07d753d5e97e2e2d09"
 const pk13 = "7711c15dea3608feaa69fd272e33fa40c39d6fa3de3e19accd2a03660d56832f"
 
+// console.log(ethers)
+// return false;
 
 const walletJson = new ethers.Wallet(pk1);
 const signer = walletJson.connect(provider);
@@ -52,30 +55,65 @@ const account11 = "0x71236D3087B102c11Bdd96Ae9B2061A7a2a7CB1A"
 const account12 = "0x71236D3087B102c11Bdd96Ae9B2061A7a2a7CB1A"
 const account13 = "0x746d140b7eF4016Cf2b7C451b0477254ef59bE74"
 
-// address do contrato Doric
-// const address = "0x61b0c854C60a5577E68be7a40Bc4D61935c1a058"
-const token01 = "0x21Ec14ecAA44A036132Ea6A267B4963D41D8E9D6"
-const token02 = "0xb386f940ddbB9CBB0aa909bc34325b13F5E4eAb9"
-const token03 = "0x8Ad80085ec08CceDB99CDb1986BcbD72d1Ef6cc0"
-const token04 = "0xB38013EB44D6496D50Abbf266c39b16761b7ba52"
-const token05 = "0xcB7d6CfFb8A10156Ee533A46a2D75AD9d3425c9E"
-const token06 = "0xdB4029Eabe19C2ED45257D6df2b158aA8B55096c"
-const token07 = "0xDd84078531bcb4788Acf25bBD60FC900C990827b"
-const tokenAddresses = [
-  token01, token02, token03, token04, token05, token06, token07
+const accounts = [
+  account2,
+  account3,
+  account4,
+  account5,
+  account6,
+  account7,
+  account8,
+  account9,
+  account10,
+  account11,
+  account12,
+  account13
 ]
+
+
+
+const tokens = require('./tokens.escolhidos.json')
+const tokenAddresses = tokens.map(t => t.address);
+
 // const address = "0x94b6dAE0E72da0F2f076e44b8B819723Fe1d8a40";
 // address do contrato BRZ
 const contractAddress = '0x420412e765bfa6d85aaac94b4f7b708c89be2e2b';
 let LAST_TRANSACTION = null;
 
 let tempo = 0;
+let data = tokens;
+
+function readJSONFile(filename) {
+  try {
+      const data = fs.readFileSync(filename, 'utf8');
+      const parsedData = JSON.parse(data);
+      return Array.isArray(parsedData) ? parsedData : [];
+  } catch (error) {
+      return [];
+  }
+}
+
+
+async function writeJSON(result, filename = 'resultado.json') {
+  const currentData = readJSONFile(filename);
+
+  // const newData = {
+  //     name: result.name,
+  //     acronym: result.acronym,
+  //     total_supply: result.total_supply,
+  //     address: result.address
+  // };
+
+  currentData.push(result);
+
+  fs.writeFileSync(filename, JSON.stringify(currentData, null, 2));
+}
+
+
 
 async function atualizaTempo() {
-  // Gera um tempo aleatório entre 1 min e 1 hora
-  tempo = Math.floor(Math.random() * (259200000 - 800000 + 1)) + 10000;
-  // tempo = Math.floor(Math.random() * (1000000 - 300000 + 1)) // + 10000;
-  // tempo = Math.floor(Math.random() * (60000 - 20000 + 1)) // + 10000;
+  // Gera um tempo aleatório entre 30s (30000ms) e 1min (60000ms)
+  tempo = Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000;
   console.log(`\n\n\nAntes: ${new Date()}`);
   console.log(`Próximo intervalo: ${tempo / 1000}s`);
   // Define o próximo intervalo
@@ -84,22 +122,48 @@ async function atualizaTempo() {
   setInterval(() => {
     // console.log(`Executando a cada ${tempo}ms`);
   }, tempo);
-  console.log(`Depois rodo o bot: ${new Date()}`);
 
   try {
     const randomAddress = tokenAddresses[Math.floor(Math.random() * tokenAddresses.length)];
+    const randomAccount = accounts[Math.floor(Math.random() * accounts.length)];
+
     const erc20 = new ethers.Contract(randomAddress, abi, signer);
-    console.log(await erc20.symbol());
+    const symbol = await erc20.symbol();
+    console.log(symbol);
+
     const randomValue = (Math.floor(Math.random() * 100) + 1).toString()
     console.log({randomValue});
     const quantity = parseEther(randomValue);
-    const result = await erc20.transfer(account2, quantity);
+
+    const nextNonce = await provider.getTransactionCount(account1, 'latest');
+    console.log("nextNonce", nextNonce);
+    
+    const gasPrice = ethers.parseUnits("50", "gwei");
+    console.log("gasPrice", gasPrice);
+    
+    const result = await erc20.transfer(account2, quantity, { nonce: nextNonce, gasPrice: gasPrice });
     console.log(result, new Date());
+
+    const JSON = {
+      symbol,
+      address: randomAddress,
+      "from": account1,
+      "to": randomAccount,
+      "value": randomValue,
+      "gas": "0x76c0",
+      "gasPrice": "50 gwei",
+      "nonce": nextNonce,
+      "data": result
+    }
     console.log("account1", await erc20.balanceOf(account1))
     console.log("account2", await erc20.balanceOf(account2))
+
+    console.log(`Depois rodo o bot: ${new Date()}`);
+    writeJSON(JSON); 
+    return result;
   } catch (error) {
-    console.error(error);
-  }
+      console.error(error);
+  }  // Chamar a função para escrever o resultado em um arquivo JSON.
 }
 
 
@@ -107,14 +171,3 @@ async function atualizaTempo() {
   // Inicia o primeiro intervalo aleatório
   atualizaTempo();
 })();
-
-// try {
-//   const erc20 = new ethers.Contract(address, abi, signer);
-//   console.log(await erc20.symbol());
-//   const result = await erc20.transfer("0x4e238622c1797115F35174C50583F5D41b915cb6", parseEther("10"));
-//   console.log(result);
-//   console.log("account1", await erc20.balanceOf("0x4e238622c1797115F35174C50583F5D41b915cb6"))
-//   console.log("account2", await erc20.balanceOf("0xa620A5199F498B81191D291c62a70aa761be7536"))
-// } catch (error) {
-//   console.error(error);
-// }
