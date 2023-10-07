@@ -131,6 +131,10 @@ async function atualizaTempo() {
     const symbol = await erc20.symbol();
     console.log(symbol);
 
+    const balance = await erc20.balanceOf(account1);
+    console.log("Saldo da account1 em tokens: ", ethers.utils.formatUnits(balance, 'wei'));  // ou use a quantidade de casas decimais do token
+
+
     const randomValue = (Math.floor(Math.random() * 100) + 1).toString()
     console.log({randomValue});
     const quantity = parseEther(randomValue);
@@ -146,6 +150,7 @@ async function atualizaTempo() {
 
     const JSON = {
       symbol,
+      balance,
       address: randomAddress,
       "from": account1,
       "to": randomAccount,
