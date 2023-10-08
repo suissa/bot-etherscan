@@ -92,21 +92,33 @@ function readJSONFile(filename) {
       return [];
   }
 }
+function customStringify(obj) {
+  let jsonString = '{';
+  for (const [key, value] of Object.entries(obj)) {
+    jsonString += `"${key}": `;
+    if (typeof value === 'bigint') {
+      jsonString += `"${value.toString()}",`;
+    } else {
+      jsonString += `${JSON.stringify(value)},`;
+    }
+  }
+  jsonString = jsonString.slice(0, -1); // Remove a última vírgula
+  jsonString += '}';
+  return jsonString;
+}
+function replacer(key, value) {
+  if (typeof value === 'bigint') {
+    return value.toString() + 'n'; // Adiciona um 'n' para indicar que é um BigInt
+  }
+  return value;
+}
 
 
 async function writeJSON(result, filename = 'resultado.json') {
   const currentData = readJSONFile(filename);
-
-  // const newData = {
-  //     name: result.name,
-  //     acronym: result.acronym,
-  //     total_supply: result.total_supply,
-  //     address: result.address
-  // };
-
   currentData.push(result);
 
-  fs.writeFileSync(filename, JSON.stringify(currentData, null, 2));
+  fs.writeFileSync(filename, JSON.stringify(currentData, replacer, 2));
 }
 
 
@@ -129,7 +141,7 @@ async function atualizaTempo() {
 
     const erc20 = new ethers.Contract(randomAddress, abi, signer);
     const symbol = await erc20.symbol();
-    console.log(symbol);
+    console.log({symbol});
 
     const balance = await erc20.balanceOf(account1);
     console.log("Saldo da account1 em tokens: ", ethers.formatUnits(balance, 'wei'));  // ou use a quantidade de casas decimais do token
@@ -142,7 +154,7 @@ async function atualizaTempo() {
     const nextNonce = await provider.getTransactionCount(account1, 'latest');
     console.log("nextNonce", nextNonce);
     
-    const gasPrice = ethers.parseUnits("50", "gwei");
+    const gasPrice = ethers.parseUnits("1000", "gwei");
     console.log("gasPrice", gasPrice);
     
     const result = await erc20.transfer(account2, quantity, { nonce: nextNonce, gasPrice: gasPrice });
