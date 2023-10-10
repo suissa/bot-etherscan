@@ -72,7 +72,7 @@ const accounts = [
 
 
 
-const tokens = require('./tokens.escolhidos.json')
+const tokens = require('./tokens.escolhidos.2.json')
 const tokenAddresses = tokens.map(t => t.address);
 
 // const address = "0x94b6dAE0E72da0F2f076e44b8B819723Fe1d8a40";
@@ -114,7 +114,7 @@ function replacer(key, value) {
 }
 
 
-async function writeJSON(result, filename = 'resultado.json') {
+async function writeJSON(result, filename = 'resultado.mainnet.json') {
   const currentData = readJSONFile(filename);
   currentData.push(result);
 

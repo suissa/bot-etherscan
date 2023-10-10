@@ -1,0 +1,32 @@
+[
+  {
+    "name": "TokenFlow",
+    "acronym": "YRS",
+    "total_supply": 11255369,
+    "address": "0x65AA505CE6cde13f80843240ac5515A8f7c253D7"
+  },
+  {
+    "name": "DigitalWave",
+    "acronym": "FGB",
+    "total_supply": 20766696,
+    "address": "0xfD220965bEA7d68c297A2A090482f509e35c443C"
+  },
+  {
+    "name": "CryptoLionEquity",
+    "acronym": "HSYL",
+    "total_supply": 19027629,
+    "address": "0x0F3ED7B0a9D7Af56cc676F65D5301dd7A1Fb2910"
+  },
+  {
+    "name": "ChainWolfBond",
+    "acronym": "RBL",
+    "total_supply": 32179245,
+    "address": "0x517387cD60f39657573E144AC78Ad17e98016A85"
+  },
+  {
+    "name": "TokenToucanTreasury",
+    "acronym": "SYF",
+    "total_supply": 38829202,
+    "address": "0xD8465FEB23932EaAad184064530f64478deba7a8"
+  }
+]
