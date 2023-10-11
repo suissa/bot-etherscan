@@ -2,7 +2,7 @@ const fs = require('fs');
 const pkg = require('eth-lightwallet')
 const web3 = require('web3')
 const { ethers, JsonRpcProvider, parseEther } = require('ethers')
-const provider = new JsonRpcProvider(`https://testnet.doric.network/`)
+const provider = new JsonRpcProvider(`https://mainnet.doric.network/`)
 const axios = require('axios');
 
 const apiKey = '7XVPRP4R6VM22S65BCU62TB4Z8F678DZ9Z';
@@ -141,7 +141,7 @@ async function atualizaTempo() {
 
     const erc20 = new ethers.Contract(randomAddress, abi, signer);
     const symbol = await erc20.symbol();
-    console.log({symbol});
+    console.log("\n\n\n\n\n\n", {symbol});
 
     const balance = await erc20.balanceOf(account1);
     console.log("Saldo da account1 em tokens: ", ethers.formatUnits(balance, 'wei'));  // ou use a quantidade de casas decimais do token
@@ -158,7 +158,7 @@ async function atualizaTempo() {
     console.log("gasPrice", gasPrice);
     
     const result = await erc20.transfer(account2, quantity, { nonce: nextNonce, gasPrice: gasPrice });
-    console.log(result, new Date());
+    console.log("\n\n\n", result, new Date());
 
     const JSON = {
       symbol,
@@ -168,7 +168,7 @@ async function atualizaTempo() {
       "to": randomAccount,
       "value": randomValue,
       "gas": "0x76c0",
-      "gasPrice": "50 gwei",
+      "gasPrice": "1000 gwei",
       "nonce": nextNonce,
       "data": result
     }

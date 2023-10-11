@@ -1,0 +1,38 @@
+[
+  {
+    "symbol": "DGTLWAVE",
+    "balance": "11079925000000000000000000n",
+    "address": "0xfD220965bEA7d68c297A2A090482f509e35c443C",
+    "from": "0x4e238622c1797115F35174C50583F5D41b915cb6",
+    "to": "0x71236D3087B102c11Bdd96Ae9B2061A7a2a7CB1A",
+    "value": "6",
+    "gas": "0x76c0",
+    "gasPrice": "50 gwei",
+    "nonce": 55,
+    "data": {
+      "_type": "TransactionReceipt",
+      "accessList": null,
+      "blockNumber": null,
+      "blockHash": null,
+      "chainId": "1717",
+      "data": "0xa9059cbb000000000000000000000000a620a5199f498b81191d291c62a70aa761be753600000000000000000000000000000000000000000000000053444835ec580000",
+      "from": "0x4e238622c1797115F35174C50583F5D41b915cb6",
+      "gasLimit": "51348",
+      "gasPrice": "1000000000000",
+      "hash": "0x31468bb677eb15499ec8a33cd41e60bb60fcee4b459c7527e47697849181ea67",
+      "maxFeePerGas": null,
+      "maxPriorityFeePerGas": null,
+      "nonce": 55,
+      "signature": {
+        "_type": "signature",
+        "networkV": "3470",
+        "r": "0x65fdc2b3020f54eb0e5ba381d935bbc503429474b674ca4a5a569472f52bbb8b",
+        "s": "0x0a97544f3b482ba409b5c34fff8eacf22be33501c17e3dd912434bf71a3d4a86",
+        "v": 28
+      },
+      "to": "0xfD220965bEA7d68c297A2A090482f509e35c443C",
+      "type": 0,
+      "value": "0"
+    }
+  }
+]
