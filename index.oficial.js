@@ -159,11 +159,13 @@ async function atualizaTempo() {
     
     const result = await erc20.transfer(account2, quantity, { nonce: nextNonce, gasPrice: gasPrice });
     console.log("\n\n\n", result, new Date());
+    console.log("\n\n\n", result.hash);
 
     const JSON = {
       symbol,
       balance,
       address: randomAddress,
+      transactionHash: result.hash,
       "from": account1,
       "to": randomAccount,
       "value": randomValue,
