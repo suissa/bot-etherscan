@@ -172,7 +172,8 @@ async function atualizaTempo() {
       "gas": "0x76c0",
       "gasPrice": "1000 gwei",
       "nonce": nextNonce,
-      "data": result
+      "data": result,
+      "timestamp": Date.now()
     }
     console.log("account1", await erc20.balanceOf(account1))
     console.log("account2", await erc20.balanceOf(account2))
