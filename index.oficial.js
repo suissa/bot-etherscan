@@ -125,7 +125,8 @@ async function writeJSON(result, filename = 'resultado.mainnet.json') {
 
 async function atualizaTempo() {
   // Gera um tempo aleatório entre 30s (30000ms) e 1min (60000ms)
-  tempo = Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000;
+  // tempo = Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000;
+  tempo = 10000;
   console.log(`\n\n\nAntes: ${new Date()}`);
   console.log(`Próximo intervalo: ${tempo / 1000}s`);
   // Define o próximo intervalo
