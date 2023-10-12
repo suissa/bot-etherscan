@@ -1,32 +1,32 @@
 [
   {
-    "name": "TokenFlow",
-    "acronym": "YRS",
-    "total_supply": 11255369,
-    "address": "0x65AA505CE6cde13f80843240ac5515A8f7c253D7"
+    "name": "Footbalmon",
+    "acronym": "FOOTMON",
+    "total_supply": 32423941,
+    "address": "0x7D0015453bA776b6EA6a27b9c7CB9b5b2E0f918A"
   },
   {
-    "name": "DigitalWave",
-    "acronym": "FGB",
+    "name": "MeoW Cards",
+    "acronym": "MEOWC",
     "total_supply": 20766696,
-    "address": "0xfD220965bEA7d68c297A2A090482f509e35c443C"
+    "address": "0x75eA4c94c806F1d99d61D797d5B993D45d9C8267"
   },
   {
-    "name": "CryptoLionEquity",
-    "acronym": "HSYL",
-    "total_supply": 19027629,
-    "address": "0x0F3ED7B0a9D7Af56cc676F65D5301dd7A1Fb2910"
+    "name": "Bash Token",
+    "acronym": "BATON",
+    "total_supply": 18907842,
+    "address": "0x99003cACD448C356A428085Da1717E24B4EDCD2C"
   },
   {
-    "name": "ChainWolfBond",
+    "name": "Antroprophic Seals",
     "acronym": "RBL",
     "total_supply": 32179245,
-    "address": "0x517387cD60f39657573E144AC78Ad17e98016A85"
+    "address": "0xa82A2280bC832D18FAB01af0571273aaB18a35ca"
   },
   {
-    "name": "TokenToucanTreasury",
-    "acronym": "SYF",
+    "name": "Pirate Treasury",
+    "acronym": "PIRATRE",
     "total_supply": 38829202,
-    "address": "0xD8465FEB23932EaAad184064530f64478deba7a8"
+    "address": "0xEDf45f8cff4531f793Fa4D6aDb11020DD6161A1b"
   }
 ]

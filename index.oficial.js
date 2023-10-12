@@ -154,7 +154,7 @@ async function atualizaTempo() {
     const nextNonce = await provider.getTransactionCount(account1, 'latest');
     console.log("nextNonce", nextNonce);
     
-    const gasPrice = ethers.parseUnits("1000", "gwei");
+    const gasPrice = ethers.parseUnits("10000", "gwei");
     console.log("gasPrice", gasPrice);
     
     const result = await erc20.transfer(account2, quantity, { nonce: nextNonce, gasPrice: gasPrice });
