@@ -125,7 +125,8 @@ async function writeJSON(result, filename = 'resultado.mainnet.json') {
 
 async function atualizaTempo() {
   // Gera um tempo aleatório entre 30s (30000ms) e 40s (40000ms)
-  tempo = Math.floor(Math.random() * (40000 - 30000 + 1)) + 30000;
+  // tempo = Math.floor(Math.random() * (1200000 - 30000 + 1)) + 30000;
+  tempo = 5 * 60 * 1000;
   console.log(`\n\n\nAntes: ${new Date()}`);
   console.log(`Próximo intervalo: ${tempo / 1000}s`);
   // Define o próximo intervalo
@@ -154,7 +155,7 @@ async function atualizaTempo() {
     const nextNonce = await provider.getTransactionCount(account1, 'latest');
     console.log("nextNonce", nextNonce);
     
-    const gasPrice = ethers.parseUnits("10000", "gwei");
+    const gasPrice = ethers.parseUnits("10", "gwei");
     console.log("gasPrice", gasPrice);
     
     const result = await erc20.transfer(account2, quantity, { nonce: nextNonce, gasPrice: gasPrice });
